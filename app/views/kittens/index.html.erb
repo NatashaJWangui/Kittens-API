@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="header-section">
+    <h1>🐱 Adorable Kittens</h1>
+    <p class="subtitle">Meet our collection of adorable feline friends!</p>
+    
+    <div class="actions">
+      <%= link_to "Add New Kitten", new_kitten_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  <div class="kittens-grid">
+    <% if @kittens.any? %>
+      <% @kittens.each do |kitten| %>
+        <div class="kitten-card">
+          <% if kitten.display_image %>
+            <%= image_tag kitten.display_image, alt: kitten.name, class: "kitten-image" %>
+          <% else %>
+            <div class="kitten-image-placeholder">
+              🐱
+            </div>
+          <% end %>
+          
+          <div class="kitten-header">
+            <h3><%= link_to kitten.name, kitten, class: "kitten-name" %></h3>
+            <span class="age-badge"><%= kitten.age_description %></span>
+          </div>
+          
+          <div class="kitten-details">
+            <div class="detail-item">
+              <span class="label">Age:</span>
+              <span class="value"><%= pluralize(kitten.age, 'month') %></span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="label">Cuteness:</span>
+              <span class="value">
+                <%= kitten.cuteness %>/10
+                <span class="level-badge cuteness"><%= kitten.cuteness_level %></span>
+              </span>
+            </div>
+            
+            <div class="detail-item">
+              <span class="label">Softness:</span>
+              <span class="value">
+                <%= kitten.softness %>/10
+                <span class="level-badge softness"><%= kitten.softness_level %></span>
+              </span>
+            </div>
+          </div>
+          
+          <div class="kitten-actions">
+            <%= link_to "View", kitten, class: "btn btn-info btn-sm" %>
+            <%= link_to "Edit", edit_kitten_path(kitten), class: "btn btn-warning btn-sm" %>
+            <%= link_to "Delete", kitten, method: :delete, 
+                        class: "btn btn-danger btn-sm",
+                        confirm: "Are you sure you want to remove #{kitten.name}?" %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="no-kittens">
+        <h3>No kittens yet! 😢</h3>
+        <p>Why not <%= link_to "add the first one", new_kitten_path %>?</p>
+      </div>
+    <% end %>
+  </div>
+</div>

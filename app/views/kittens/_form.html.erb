@@ -1,0 +1,52 @@
+<%= form_with model: kitten, local: true, class: "kitten-form" do |form| %>
+  <% if kitten.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(kitten.errors.count, "error") %> prevented this kitten from being saved:</h4>
+      <ul>
+        <% kitten.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :name, "Kitten Name" %>
+    <%= form.text_field :name, class: "form-control", placeholder: "e.g., Whiskers, Mittens, Mr. Fluffington" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :image_url, "Photo URL (optional)" %>
+    <%= form.url_field :image_url, class: "form-control", placeholder: "https://example.com/cute-kitten.jpg" %>
+    <small class="form-text">Enter a URL to a cute kitten photo</small>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :age, "Age (in months)" %>
+    <%= form.number_field :age, class: "form-control", min: 1, max: 30, placeholder: "6" %>
+    <small class="form-text">Enter age in months (1-30)</small>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :cuteness, "Cuteness Level (1-10)" %>
+    <%= form.range_field :cuteness, class: "form-control-range", min: 1, max: 10, value: kitten.cuteness || 5 %>
+    <div class="range-labels">
+      <span>1 (Cute)</span>
+      <span>10 (Impossibly Cute!)</span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :softness, "Softness Level (1-10)" %>
+    <%= form.range_field :softness, class: "form-control-range", min: 1, max: 10, value: kitten.softness || 5 %>
+    <div class="range-labels">
+      <span>1 (Soft)</span>
+      <span>10 (Cloud-like!)</span>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit class: "btn btn-success" %>
+    <%= link_to "Cancel", kittens_path, class: "btn btn-secondary" %>
+  </div>
+<% end %>

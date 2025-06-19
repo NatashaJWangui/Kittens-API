@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="kitten-profile">
+    <div class="profile-header">
+      <h1>🐾 <%= @kitten.name %></h1>
+      <span class="age-badge large"><%= @kitten.age_description %></span>
+      
+      <% if @kitten.display_image %>
+        <%= image_tag @kitten.display_image, alt: @kitten.name, class: "profile-image" %>
+      <% else %>
+        <div class="profile-image-placeholder">
+          🐱
+        </div>
+      <% end %>
+    </div>
+    
+    <div class="profile-details">
+      <div class="detail-card">
+        <h3>📅 Age</h3>
+        <p class="stat-value"><%= pluralize(@kitten.age, 'month') %> old</p>
+      </div>
+      
+      <div class="detail-card">
+        <h3>😍 Cuteness Level</h3>
+        <div class="rating">
+          <span class="rating-value"><%= @kitten.cuteness %>/10</span>
+          <span class="rating-label"><%= @kitten.cuteness_level %></span>
+        </div>
+      </div>
+      
+      <div class="detail-card">
+        <h3>🤗 Softness Level</h3>
+        <div class="rating">
+          <span class="rating-value"><%= @kitten.softness %>/10</span>
+          <span class="rating-label"><%= @kitten.softness_level %></span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="profile-actions">
+      <%= link_to "Edit #{@kitten.name}", edit_kitten_path(@kitten), class: "btn btn-warning" %>
+      <%= link_to "Delete #{@kitten.name}", @kitten, method: :delete, 
+                  class: "btn btn-danger",
+                  confirm: "Are you sure you want to remove #{@kitten.name}?" %>
+      <%= link_to "Back to All Kittens", kittens_path, class: "btn btn-secondary" %>
+    </div>
+  </div>
+</div>

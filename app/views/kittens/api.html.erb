@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="api-docs">
+    <h1>🔌 Kittens API Documentation</h1>
+    <p class="subtitle">RESTful API endpoints for managing adorable kittens</p>
+    
+    <div class="endpoint-section">
+      <h2>📋 Available Endpoints</h2>
+      
+      <div class="endpoint">
+        <h3>GET /kittens</h3>
+        <p>Retrieve all kittens</p>
+        <div class="code-block">
+          <code>curl -H "Accept: application/json" http://localhost:3000/kittens</code>
+        </div>
+      </div>
+      
+      <div class="endpoint">
+        <h3>GET /kittens/:id</h3>
+        <p>Retrieve a specific kitten</p>
+        <div class="code-block">
+          <code>curl -H "Accept: application/json" http://localhost:3000/kittens/1</code>
+        </div>
+      </div>
+    </div>
+    
+    <div class="example-section">
+      <h2>📄 Example Response</h2>
+      <div class="code-block">
+        <pre><code>{
+  "id": 1,
+  "name": "Mr. Whiskers",
+  "age": 8,
+  "cuteness": 9,
+  "softness": 8,
+  "age_description": "Young kitten",
+  "cuteness_level": "Extremely Cute",
+  "softness_level": "Fluffy"
+}</code></pre>
+      </div>
+    </div>
+    
+    <div class="testing-section">
+      <h2>🧪 Testing with IRB</h2>
+      <div class="code-block">
+        <pre><code>require 'rest-client'
+require 'json'
+
+# Get all kittens
+response = RestClient.get("http://localhost:3000/kittens", accept: :json)
+kittens = JSON.parse(response.body)
+
+# Get specific kitten
+kitten = RestClient.get("http://localhost:3000/kittens/1", accept: :json)
+data = JSON.parse(kitten.body)
+puts data['name']</code></pre>
+      </div>
+    </div>
+  </div>
+</div>
